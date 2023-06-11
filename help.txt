@@ -1,0 +1,137 @@
+### Vim ###########################
+
+# Normal 模式
+,z         将文件居中
+,f         打开面板，查看最近打开的文件列表
+q          退出面板
+ggVG       全选
++          扩大视觉选择
+-          缩小视觉选择
+cs"'       将双引号换成单引号
+
+# 复制粘贴
+,pp        粘贴模式，复制前使用，不然因为自动换行，格式会乱
+<C-p>      粘贴上一个复制的内容，可以连续按来粘贴多个内容
+<C-n>      粘贴下一个复制的内容
+<C-f>      快速查找并打开文件
+
+# 注释
+gcc        注释当前行，再次输入则撤销注释
+num + gcc  注释 num 行
+gc         注释选中部分（Visual 模式）
+
+# 删除操作
+d:         delete
+dd         删除当前行
+diw        删除光标所在单词
+dib        删除括号内的所有
+dta        删除光标到a之间的字符
+d}         删除当前位置到下一个段落的所有字符
+dw         正向删除一个单词（光标后的部分）
+db         逆向删除一个单词（光标前的部分）
+d$         删除光标所在位置至本行末尾
+d0         删除光标所在位置至本行首部
+c:         change，与 d 的区别是操作后进入插入状态
+y:         yank，与 d 的区别是复制操作
+~          大小写字母转换
+s          删除一个字符并进入插入模式
+x          删除一个字符
+ciw        删除一个单词并进入insert模式
+ddp        和下一行互换位置
+xp         字符互换位置
+bi         单词前插入
+ea         单词后插入
+
+zi         展开和折叠
+:e         重新载入当前文件
+:e!        放弃当前修改，强制重新载入
+:wq newfilename   相当于 cp filename newfilename
+:1,10 wq newfilename   复制 1-10 行到新文件
+:r filename   复制 filename 的内容到当前位置
+
+# 宏
+qb         打开宏录制，左下角会显示 "recording @b" 字样
+yyp        录制操作，将当前行复制并粘贴到第二行
+q          关闭宏
+@b         播放指定宏
+@@         重复播放上次的宏
+100@@      重复播放上次的宏 100 次
+
+# 搜索
+gd         光标移动至单词，按下即可搜索该单词，区分大小写
+/          输入单词向下搜索
+?          输入单词向上搜索
+:nohl      取消搜索高亮
+,Enter     取消搜索高亮
+
+# 替换
+:4,10s/code/name/g   在 4 到 10 行进行替换
+:%s/code/name        全文替换
+:$s/code/name        替换最后一个
+
+# Visual 模式
+,r         选中文本后，可以进行搜索或替换
+S+''       选中字符后，使用 S+"" 或 '' 可以快速给字符加上引号
+
+# Insert 模式
+<C-r>     插入当前时间
+<C-j>     或 Tab 代码补全
+<C-n>     自动补全变量名
+F5        在 Vim 中直接运行代码
+
+vim -O INCAR INCAR_mech  在左右打开两个文件
+
+i         在光标前进入插入模式
+I         在当前行左边第一个非空字符前进入插入模式
+a         在光标后进入插入模式
+A         在当前行右边第一个非空字符前进入插入模式
+o         在光标的下一行插入
+O         在光标的上一行插入
+s         删除当前字符并进入插入模式
+S         删除当前行并进入插入模式
+cc        删除当前行并进入插入模式
+
+# NERDTree 的操作
+,nn       显示或隐藏 NERDTree 目录树
+,nb       从 NERDTree 书签中打开文件
+,nf       在 NERDTree 目录树中查找文件
+<C-j>     将光标切换到当前窗口的下方窗口
+<C-k>     将光标切换到当前窗口的上方窗口
+<C-h>     将光标切换到当前窗口的左侧窗口
+<C-l>     将光标切换到当前窗口的右侧窗口
+i         在左右分屏打开文件
+s         在上下分屏打开文件
+<C-w>x    对调两个窗口
+
+# ack 操作
+
+### Command #######################
+# screen
+screen -S name    新建一个名为 name 的窗口
+screen -ls        列出窗口列表
+screen -r test2   恢复 test2 窗口
+screen -rD test2  当状态是 Attached 时，加上 -D 参数
+kill -9 threadnum  通过进程ID杀死窗口
+screen -wipe      自动清除所有处于 dead 状态的窗口
+
+# sed
+sed -n '18p' xx.txt                         查看 xx.txt 第 18 行的数据
+sed -i '/stress/,+1d' non-toxic/*/m2d.sh    删除 non-toxic 下面文件夹中所有 m2d.sh 中含有 stress 的行以及下一行
+sed -i '3s/0.01/0.02/g' INCAR               修改 INCAR 文件中的第三行，将 0.01 改成 0.02
+
+### zsh ###########################
+d           显示当前 session 进入过的路径，输入数字即可进入相应目录
+z           显示使用 zsh 进入过的路径
+z -l aaa    列出包含 aaa 的所有历史路径
+z aaa       输入 aaa 并按 Tab 键可以显示进入过的路径
+cd /v/w/s   输入 /v/w/s 并按 Tab 键 --> cd /var/www/site
+kill emacs  输入 emacs 并按 Tab 键 --> kill 59686
+
+# 通配符
+ls *.png          查找当前目录下所有以 .png 结尾的文件
+ls file?.txt      匹配类似于 file1.txt、file2.txt 等的文件名
+ls file[123].txt  匹配 file1.txt、file2.txt、file3.txt
+ls {*.txt,*.md}   匹配所有以 .txt 或 .md 结尾的文件
+
+
+
