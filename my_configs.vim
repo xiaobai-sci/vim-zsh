@@ -1,4 +1,5 @@
 set nu
+set relativenumber
 " 设置分割窗口分割线 以及缓冲区末尾空行的 ~
 set fillchars=vert:\|,eob:\ 
 " 给字符加引号
@@ -45,6 +46,8 @@ autocmd FileType snippets setlocal foldmethod=manual
 " Close the tab if NERDTree is the only window remaining in it.
 autocmd BufEnter * if winnr('$') == 1 && (exists('b:NERDTree') && b:NERDTree.isTabTree() || &filetype == 'snippets') | quit | endif
 
-map <leader>q :q!<cr>
-map <leader>x :x<cr>
+nnoremap <leader>q :q!<cr>
+nnoremap <leader>x :x<cr>
+nnoremap <leader>v <C-w>v<cr>
+nnoremap <leader>s <C-w>s<cr>
 
